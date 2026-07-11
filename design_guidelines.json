@@ -1,0 +1,162 @@
+{
+  "theme": "dark",
+  "typography": {
+    "fonts": {
+      "heading": "Cabinet Grotesk, sans-serif",
+      "body": "Manrope, sans-serif",
+      "monospace": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-5xl tracking-tight font-bold",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-semibold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-medium",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm",
+      "overline": "text-xs tracking-[0.2em] uppercase"
+    },
+    "rules": [
+      "Never use Inter, Roboto, or Open Sans for headings.",
+      "Headings must use tight letter spacing (tracking-tight).",
+      "Hierarchy gap between heading and subheading must not exceed 2 Tailwind steps."
+    ]
+  },
+  "colors": {
+    "archetype": "ARCHETYPE 5: LUXURY mixed with SWISS & HIGH-CONTRAST (Premium Enterprise)",
+    "palette": {
+      "background": "#060F1E",
+      "surface": "#0F1A2E",
+      "primary": "#1E3A8A",
+      "secondary": "#1D4ED8",
+      "accent": "#38BDF8",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "border": "rgba(255, 255, 255, 0.1)",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "danger": "#EF4444"
+    },
+    "rules": [
+      "Do not use generic teal for dashboards.",
+      "Use #060F1E for the background to reduce eye strain, not pure black.",
+      "Cards must be a slightly lighter blue (#0F1A2E).",
+      "Ensure text contrast meets APCA/WCAG AA standards."
+    ]
+  },
+  "visual_enhancers": {
+    "surfaces": [
+      "Use 'Grid Borders' style for data-heavy sections (border-r border-b border-white/10).",
+      "Use 'Glassmorphism' (backdrop-blur-xl bg-[#060F1E]/70 border-b border-white/10) for sticky headers and nav overlays.",
+      "Cards should have a flat background (#0F1A2E), 1px subtle border, max 8px border-radius (rounded-lg)."
+    ],
+    "shadows": [
+      "Minimal shadow use in dark mode. Rely on borders and surface color steps to create depth.",
+      "Use subtle drop-shadows only for glowing accents or floating action buttons."
+    ]
+  },
+  "components": {
+    "strategy": [
+      "Use Shadcn UI components heavily customized to match the Dark Blue Enterprise theme.",
+      "Buttons: Pill-shaped or max 8px radius, blue background (#1D4ED8) with smooth hover/active scale animations.",
+      "Inputs: Dark surface (#060F1E or #0F1A2E) with white/10 border, focus ring in sky blue (#38BDF8).",
+      "Tables: High density, border-collapse, subtle borders.",
+      "Charts: Use Shadcn charts (Recharts) with sky blue and royal blue strokes. Subtle translucent fills."
+    ],
+    "required_libraries": [
+      "lucide-react (Icons)",
+      "sonner (Toast notifications)",
+      "recharts (Data visualization)",
+      "date-fns (Calendar/Dates)",
+      "tsparticles (Login Background)"
+    ]
+  },
+  "grids_and_layouts": {
+    "mode": "MODE B: High Density Grid (For Dashboards / Analytics)",
+    "base_grid": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4",
+    "gap": "gap-4 lg:gap-6",
+    "rules": [
+      "Every pixel must be utilized. Use h-full on children.",
+      "No jagged bottoms in rows.",
+      "Mobile-first responsive always. Padding must scale: p-4 to p-6/p-8 on desktop.",
+      "Containers with borders must have internal padding to prevent text collision."
+    ]
+  },
+  "motion": {
+    "rules": [
+      "All interactive elements need micro-animations (hover states, focus states).",
+      "Use specific transitions, NEVER 'transition: all'. Example: 'transition: transform 0.2s ease, opacity 0.2s ease'.",
+      "Buttons must have a hover and active state (e.g., active:scale-95).",
+      "Stagger list items on entrance."
+    ]
+  },
+  "accessibility": {
+    "rules": [
+      "All interactive and key informational elements MUST include a 'data-testid' attribute (e.g., data-testid='login-button').",
+      "Maintain minimum 4.5:1 contrast ratio for text.",
+      "Explicitly set hover colors (e.g., hover:bg-blue-800 hover:text-white).",
+      "Never use complete transparent backgrounds in headers or dropdown overlays."
+    ]
+  },
+  "media": {
+    "icons": "lucide-react (Use crisp, legible stroke icons, preferably sky blue or white). Do not use emoji characters.",
+    "images": [
+      "Use only the provided URLs.",
+      "Images should never exceed 80vh on mobile."
+    ]
+  },
+  "3d_libraries_and_creative": {
+    "strategy": "Minimalist usage for dashboards. Use TSParticles for a subtle constellation or geometric mesh network effect ONLY on the login/authentication screen to convey a 'premium tech' feel. Do not use 3D on data-heavy internal dashboard screens to maintain clarity.",
+    "library": "tsparticles"
+  },
+  "image_urls": {
+    "login_background": {
+      "url": "https://images.pexels.com/photos/28428584/pexels-photo-28428584.jpeg",
+      "description": "Dynamic 3D geometric shapes creating a modern abstract design set against a deep blue backdrop."
+    },
+    "school_context_banner": {
+      "url": "https://images.unsplash.com/photo-1574958269340-fa927503f3dd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtb2Rlcm4lMjBzY2hvb2wlMjBidWlsZGluZ3xlbnwwfHx8fDE3ODIzODgyODl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Modern school building at sunset."
+    },
+    "student_leader_1": {
+      "url": "https://images.unsplash.com/photo-1544168190-79c17527004f",
+      "description": "Professional student portrait (woman in blue shirt)."
+    },
+    "student_leader_2": {
+      "url": "https://images.unsplash.com/photo-1611432579402-7037e3e2c1e4",
+      "description": "Professional student portrait (man smiling)."
+    },
+    "student_leader_3": {
+      "url": "https://images.unsplash.com/photo-1731027488418-ef5a05b2d71b",
+      "description": "Student in graduation gown for certificate module."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build the dashboard using React (.js files), Tailwind CSS, and Shadcn UI.",
+    "Implement the Dark Blue theme precisely using the colors defined in the palette. Do not invent new colors.",
+    "Use 'Cabinet Grotesk' or 'Outfit' for headings, not standard sans-serif.",
+    "Implement a high-density, card-based layout with subtle 1px borders and max 8px rounded corners.",
+    "Create the 3 distinct attendance sessions (Break 1, Break 2, Assembly) as Tabs or distinct views within the Duty Attendance module.",
+    "For the Announcement board, ensure read/unread status is clearly visible with typography weight or subtle indicator dots.",
+    "All test IDs must be kebab-case and role-based (e.g., data-testid='leader-row-approve-button').",
+    "DO NOT use raw HTML components for complex interactions (use Shadcn Select, Dialog, Calendar).",
+    "Create a clean, enterprise-grade navigation sidebar. Avoid hamburger menus on desktop viewports."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy and surface color stepping.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) for sticky overlays.",
+    "You MUST NOT apply universal transition (e.g., 'transition: all'). Always add transitions for specific interactive elements excluding transforms.",
+    "You MUST NOT center align the app container. Do not add '.App { text-align: center; }' in the CSS.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, custom cursors, selection states, and loading animations separate good from extraordinary.",
+    "Use only the provided image URLs. NEVER use placeholder URLs.",
+    "Use 'sonner' for toasts located in '/app/src/components/ui/sonner.js' or similar.",
+    "Examine existing components to understand patterns before creating new ones.",
+    "Prioritize optical alignment over strict geometrical alignment."
+  ]
+}
