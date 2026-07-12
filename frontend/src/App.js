@@ -1,55 +1,81 @@
-import { useEffect } from "react";
+import React from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import { HOME } from "@/constants/testIds";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "sonner";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
+import Login from "@/pages/Login";
+import Layout from "@/components/Layout";
+import Dashboard from "@/pages/Dashboard";
+import Leaders from "@/pages/Leaders";
+import Attendance from "@/pages/Attendance";
+import Leaves from "@/pages/Leaves";
+import Reports from "@/pages/Reports";
+import Events from "@/pages/Events";
+import Inspections from "@/pages/Inspections";
+import Rewards from "@/pages/Rewards";
+import Announcements from "@/pages/Announcements";
+import IDCards from "@/pages/IDCards";
+import Certificates from "@/pages/Certificates";
+import Settings from "@/pages/Settings";
+import Notifications from "@/pages/Notifications";
+import Profile from "@/pages/Profile";
+import Rankings from "@/pages/Rankings";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+function Protected({ children, roles }) {
+  const { user } = useAuth();
+  if (user === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-slate-300" data-testid="loading-screen">
+        Loading...
+      </div>
+    );
+  }
+  if (!user) return <Navigate to="/login" replace />;
+  if (roles && !roles.includes(user.role)) return <Navigate to="/" replace />;
+  return children;
+}
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+function AppRoutes() {
+  const { user } = useAuth();
   return (
-    <div>
-      <header className="App-header">
-        <a
-          data-testid={HOME.emergentLink}
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
+      <Route
+        path="/"
+        element={
+          <Protected>
+            <Layout />
+          </Protected>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="leaders" element={<Protected roles={["super_admin", "admin"]}><Leaders /></Protected>} />
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="leaves" element={<Leaves />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="events" element={<Events />} />
+        <Route path="inspections" element={<Protected roles={["super_admin", "admin"]}><Inspections /></Protected>} />
+        <Route path="rewards" element={<Rewards />} />
+        <Route path="rankings" element={<Rankings />} />
+        <Route path="announcements" element={<Announcements />} />
+        <Route path="id-cards" element={<Protected roles={["super_admin"]}><IDCards /></Protected>} />
+        <Route path="certificates" element={<Protected roles={["super_admin"]}><Certificates /></Protected>} />
+        <Route path="settings" element={<Protected roles={["super_admin"]}><Settings /></Protected>} />
+        <Route path="notifications" element={<Notifications />} />
+        <Route path="profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
-};
+}
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <AppRoutes />
+        <Toaster theme="dark" position="top-right" richColors />
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }
 
