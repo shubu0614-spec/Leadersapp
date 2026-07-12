@@ -108,8 +108,15 @@ async def get_settings() -> dict:
     if not s:
         s = Settings().model_dump()
         await db.settings.insert_one(s)
+        s.pop("_id", None)
+        return s
     s.pop("_id", None)
-    return s
+    # Backfill: merge defaults for any new fields added to the model over time
+    defaults = Settings().model_dump()
+    merged = {**defaults, **s}
+    if merged != s:
+        await db.settings.update_one({"id": "singleton"}, {"$set": merged})
+    return merged
 
 
 async def add_notification(user_leader_id: str, ntype: str, title: str, message: str):
